@@ -4,22 +4,26 @@ import time
 
 start = time.time()
 
-Randnumbers = []
 root = Tk()
 root.geometry("500x500")
-
+random_num = []
 def get_random_num(min_num,max_num, num_size):
     random_num = np.random.randint(min_num,max_num, size=num_size)
     return random_num
 
 
-def get_random_num2(event):
-    random_num2 = np.random.randint(1000, size=10)
+def random_num2():
+    random_num2 = np.random.randint(0, 1000, size=10)
     array_label.config(text=random_num2)
-    globals.Randnumbers = random_num2
+    global random_num
+    random_num = random_num2
+    button_bubble_sort.pack()
 
+def get_random_num2():
+    return random_num
 
-def bubbleSort(arr):
+def bubble_sort():
+    arr = get_random_num2()
     n = len(arr)
     for x in range(n):
         swapped = False
@@ -29,8 +33,8 @@ def bubbleSort(arr):
                 swapped = True
         if swapped == False :
             break
-
-    array_label.config(text=arr)
+    bubble_sort_label.config(text=arr)
+    bubble_sort_label.pack()
 
 def quit_windows():
     root.destroy()
@@ -38,22 +42,18 @@ def quit_windows():
 
 
 #--------------------button--------------------
-button_gen = Button(root, text="Gen random number")
-button_gen.bind("<Button-1>", get_random_num2)
+button_gen = Button(root, text="Gen random number", command=random_num2)
 
-button_bubble_sort = Button(root, text="BubbleSort the random number")
-button_bubble_sort.bind("<Button-1>", bubbleSort(Randnumbers))
+button_bubble_sort = Button(root, text="BubbleSort", command=bubble_sort)
 
 button_quit = Button(root, text="Exit", command=quit_windows)
 
 #--------------------label--------------------
 array_label = Label(root, text="")
 bubble_sort_label = Label(root, text="")
-
 #--------------------pack--------------------
 button_gen.pack()
 array_label.pack()
-bubble_sort_label.pack()
 button_quit.pack(side="bottom")
 
 #--------------------start--------------------
