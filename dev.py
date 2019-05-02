@@ -19,11 +19,8 @@ def random_num2():
     random_num = random_num2
     button_bubble_sort.pack()
 
-def get_random_num2():
-    return random_num
-
 def bubble_sort():
-    arr = get_random_num2()
+    arr = random_num
     n = len(arr)
     for x in range(n):
         swapped = False
